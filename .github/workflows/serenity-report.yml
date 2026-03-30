@@ -1,41 +1,43 @@
-name: Serenity BDD E2E & GitHub Pages
+name: Serenity BDD Report & Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - develop
+      - feature/setup-api-framework
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
-  test-and-report:
+  test-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Set up Java 17 (Temurin)
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.8
 
-      - name: Run Serenity Tests
-        run: ./gradlew test aggregate -Dheadless.mode=true
-        continue-on-error: true
-
-      - name: Publish to GitHub Pages
-        if: github.ref == 'refs/heads/main'
+      - name: Run Tests and Generate Serenity Reports
+        run: gradle clean test aggregate -Dheadless.mode=true
+      
+      - name: Deploy Serenity Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/site/serenity
-          keep_files: true
