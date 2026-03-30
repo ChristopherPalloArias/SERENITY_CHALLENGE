@@ -20,13 +20,22 @@
 <img src="https://img.shields.io/badge/Serenity_BDD-4.1.14-80C342?style=for-the-badge&logo=testinglibrary&logoColor=white" alt="Serenity BDD" />
 <img src="https://img.shields.io/badge/Cucumber-23D96C?style=for-the-badge&logo=cucumber&logoColor=white" alt="Cucumber" />
 <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white" alt="Gradle" />
-<img src="https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white" alt="Selenium" />
 <br />
 <a href="https://skillicons.dev">
   <img src="https://skillicons.dev/icons?i=java,github,githubactions" alt="Automation Stack" />
 </a>
 
 </div>
+
+---
+
+## 📌 Panel de Evaluación y Entregables Solicitados
+
+> ⚠️ **ATENCIÓN EVALUADOR:** Todos los insumos obligatorios exigidos en el documento del ejercicio fueron resueltos, documentados y pueden ser auditados de forma inmediata:
+
+- 📄 **Instrucciones de Ejecución:** [`readme.txt`](./readme.txt) 
+- 🧠 **Hallazgos y Conclusiones QA:** [`conclusiones.txt`](./conclusiones.txt) 
+- 📊 **Evidencia de Ejecución (Reporte Serenity BDD):** 👉 **[Visualizar Reporte E2E Interactivo en GitHub Pages](https://ChristopherPalloArias.github.io/SERENITY_CHALLENGE/)**
 
 ---
 
@@ -51,8 +60,6 @@ La prueba exige validar el flujo de compra iterativo en la página [SauceDemo](h
 - Visualizar el carrito y completar el formulario con datos personales.
 - Finalizar la compra de manera exitosa.
 - **Validar asertivamente la confirmación exacta:** `THANK YOU FOR YOUR ORDER`.
-
-> **Nota para los Evaluadores:** Adicional a este README gráfico detallado, los archivos de texto nativos (`readme.txt` y `conclusiones.txt`) solicitados obligatoriamente en la instrucción del ejercicio, se encuentran diligenciados y disponibles en la raíz de este proyecto.
 
 ---
 
