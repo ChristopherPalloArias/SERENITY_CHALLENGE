@@ -1,9 +1,11 @@
-defaultTasks 'clean', 'test', 'aggregate'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.1.14'
+}
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+defaultTasks 'clean', 'test', 'aggregate'
 
 group = 'com.saucedemo'
 version = '1.0.0-SNAPSHOT'
@@ -20,15 +22,6 @@ ext {
 
 repositories {
     mavenCentral()
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:4.1.14")
-    }
 }
 
 dependencies {
