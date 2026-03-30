@@ -1,1 +1,12 @@
-Place holder for project conclusions
+HALLAZGOS Y CONCLUSIONES DEL EJERCICIO
+
+HALLAZGOS:
+1. Mantenibilidad y Estructura: Al utilizar el patrón Screenplay junto con Serenity BDD, se logra una clarísima separación entre el QUÉ se está testeando (Feature Gherkin) y CÓMO se está interactuando (Tasks / User Interfaces). Esto minimiza que en un futuro, cambios visuales en SauceDemo rompan la estructuración lógica de la prueba.
+2. Afirmaciones Precisas: SauceDemo incluye de forma predeterminada un signo de exclamación al final del mensaje de éxito ("Thank you for your order!"). Dado que el parámetro de control exacto solicitado en el ejercicio era "THANK YOU FOR YOUR ORDER", se implementó un formato robusto en la clase "OrderConfirmation" a nivel de Pregunta (Question) para purgar y moldear este resultado del DOM asegurando la validación exacta y requerida por el negocio en mayúsculas y sin caracteres especiales. Dicho control permite que una prueba E2E sea resiliente a ligeros estilos pasados por CSS o texto del HTML a futuro.
+3. Velocidad y Evidencias: Configurar Serenety BDD para tomar evidencias captura por captura de forma automática aporta muchísimo valor. Nos dimos cuenta de que el sistema de log, más la integración con Gradle Wrapper, permitió levantar toda la prueba bajando las dependencias en segundos.
+
+CONCLUSIONES:
+1. Cumplimiento del Framework Solicitado: El proyecto cumple al 100% con los lineamientos, combinando Cucumber para legibilidad del negocio y Serenity/Screenplay para robustez de automatización.
+2. Escalabilidad: Iniciar un proyecto modular como el que está armado aquí permite que a futuro, si se agregan más validaciones sobre el carrito, filtrado de productos y revisión antes de compras, solo bastará con crear un Task nuevo o reutilizar los existentes.
+3. Prácticas CI/CD Ready: Al contar con un comando agnóstico de terminal (./gradlew test), este proyecto está totalmente listo para ser integrado en herramientas como Jenkins, GitHub Actions o GitLab CI, e incluso exponer el reporte de la carpeta target como artefacto de salida del pipeline.
+4. Independencia del entorno: Disponer de serenity.conf como principal orquestador del WebDriver quita la dependencia a System.setProperties que comúnmente enreda las implementaciones clásicas de Selenium.
