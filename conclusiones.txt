@@ -1,13 +1,23 @@
-HALLAZGOS Y CONCLUSIONES DEL EJERCICIO
+===========================================================
+CONCLUSIONES Y HALLAZGOS DEL RETO FUNCIONAL (SERENITY)
+===========================================================
 
-HALLAZGOS:
-1. Mantenibilidad y Estructura: Al utilizar el patrón Screenplay junto con Serenity BDD, se logra una clarísima separación entre el QUÉ se está testeando (Feature Gherkin) y CÓMO se está interactuando (Tasks / User Interfaces). Esto minimiza que en un futuro, cambios visuales en SauceDemo rompan la estructuración lógica de la prueba.
-2. Afirmaciones Precisas: SauceDemo incluye de forma predeterminada un signo de exclamación al final del mensaje de éxito ("Thank you for your order!"). Dado que el parámetro de control exacto solicitado en el ejercicio era "THANK YOU FOR YOUR ORDER", se implementó un formato robusto en la clase "OrderConfirmation" a nivel de Pregunta (Question) para purgar y moldear este resultado del DOM asegurando la validación exacta y requerida por el negocio en mayúsculas y sin caracteres especiales. Dicho control permite que una prueba E2E sea resiliente a ligeros estilos pasados por CSS o texto del HTML a futuro.
-3. Velocidad y Evidencias: Configurar Serenety BDD para tomar evidencias captura por captura de forma automática aporta muchísimo valor. Nos dimos cuenta de que el sistema de log, más la integración con Gradle Wrapper, permitió levantar toda la prueba bajando las dependencias en segundos.
+Analizando la implementación automatizada sobre la plataforma E-Commerce de SauceDemo, se establecen los siguientes hallazgos técnicos QA alineados al Ejercicio 1:
 
-CONCLUSIONES:
-1. Cumplimiento del Framework Solicitado: El proyecto cumple al 100% con los lineamientos, combinando Cucumber para legibilidad del negocio y Serenity/Screenplay para robustez de automatización.
-2. Escalabilidad: Iniciar un proyecto modular como el que está armado aquí permite que a futuro, si se agregan más validaciones sobre el carrito, filtrado de productos y revisión antes de compras, solo bastará con crear un Task nuevo o reutilizar los existentes.
-3. Prácticas CI/CD Ready: Al contar con un comando agnóstico de terminal (./gradlew test), el proyecto fue integrado exitosamente en un pipeline de GitHub Actions. Como valor agregado a la prueba, el proyecto exporta su "Living Documentation" generada por Serenity de forma automatizada hacia GitHub Pages. El evaluador no necesita compilar localmente para verificar el impacto y las capturas de ejecución visual. Está todo centralizado y alojado para revisión inmediata y pública en este enlace:
-👉 https://christopherpalloarias.github.io/SERENITY_CHALLENGE/
-4. Independencia del entorno: Disponer de serenity.conf como principal orquestador del WebDriver quita la dependencia a System.setProperties que comúnmente enreda las implementaciones clásicas de Selenium.
+1. ASERCIÓN PURIFICADA CONTRA EL DOM Y ORTOGRAFÍA
+   Hallazgo: La página web de SauceDemo emite dinámicamente el título del checkout utilizando convención de sintaxis de oración con símbolos (!). No obstante, el criterio estricto (SLA) del ejercicio exigía la validación exacta sobre la frase: "THANK YOU FOR YOUR ORDER".
+   Conclusión: La afirmación del framework se resolvió inyectando manipulación pura sobre el nodo del DOM desde el patrón Question ("OrderConfirmation.java"). Ejecutando sanitización algorítmica de Strings (extracción de caracteres, replace, y toUpperCase), se garantizó que el assert en verde (Passed) sea fiel a la exigencia del negocio sin ser falsamente engañado por el HTML superficial.
+
+2. PATRÓN DE DISEÑO SCREENPLAY VS PAGE OBJECT MODEL
+   Hallazgo: A diferencia de los scripts monolíticos antiguos basados en Page Object Model, este reto requería escalabilidad a nivel de acciones (Loguearse, Agregar, Llenar Checkout).
+   Conclusión: La arquitectura se separó elegantemente usando Screenplay. La responsabilidad se dividió dividiendo el "Qué" ocurre (Archivos Gherkin) del "Cómo" ocurre (Tasks, Questions, Interfaces). Esto aporta que la prueba en caso de cambios de UI, no impacte la lógica transaccional.
+
+3. ESTABILIDAD DE EJECUCIÓN AGNOSTICA (CI/CD HEADLESS)
+   Hallazgo: Configurar el navegador Chrome con entorno gráfico (`headless=false`) en el `serenity.conf` es espectacular para local, pero condena la solución a fallar inevitablemente al intentar integrarla a nodos remotos de CI/CD o pipelines que carecen de tarjetas gráficas y renders de pantalla.
+   Conclusión: Se modificó la estrategia de inyección del Web-Driver. Mediante la propiedad `-Dheadless.mode=true` seteada dinámicamente sobre la bandera de Github Actions, se logró ejecutar las pruebas ciegamente (virtualmente) en la nube sin afectar la configuración nativa que los colegas usarán de forma gráfica en sus OS locales.
+
+4. INDEPENDENCIA DEL ECOSISTEMA NATIVO
+   Hallazgo: Clásicamente las automatizaciones con Selenium exigen configuraciones pesadas sobre los binarios de los navegadores (`System.setProperty`).
+   Conclusión: Serenity BDD mitigó masivamente esta burocracia gracias a `serenity.conf` auto-gestionando WebDriverManager (WDM) debajo de capa, logrando que el evaluador del programa sea capaz de ejecutar instantáneamente tras clonar, en milisegundos sin lidiar con paths en Linux, Mac, o Windows.
+
+===========================================================
