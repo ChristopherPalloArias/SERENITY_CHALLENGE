@@ -23,8 +23,9 @@ El proyecto cuenta con el Gradle Wrapper incluido, por lo que NO es necesario te
 Serenity es conocido por su excelente 'Living Documentation'.
 Al finalizar la prueba, el reporte visual (con evidencias captura a captura y del escenario) se generará automáticamente.
 
-- Diríjase a la ruta: target/site/serenity/index.html
-- Abra este archivo index.html en cualquier navegador (Chrome, Edge, Firefox).
+- OPCIÓN LOCAL: Diríjase a la ruta `target/site/serenity/index.html` y abra este archivo index.html en cualquier navegador.
+- OPCIÓN ONLINE (RECOMENDADA): El proyecto cuenta con un proceso de Integración Continua (GitHub Actions) que despliega el reporte "Living Documentation" automáticamente. Puede visualizar el resultado de la ejecución exitosa de este proyecto dirigiéndose a la siguiente URL en la nube de GitHub Pages:
+  👉 https://christopherpalloarias.github.io/SERENITY_CHALLENGE/
 
 4. ESTRUCTURA DEL PROYECTO (PATRÓN SCREENPLAY)
 - src/test/resources/features/: Contiene el archivo checkout.feature escrito en lenguaje Gherkin.

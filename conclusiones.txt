@@ -8,5 +8,6 @@ HALLAZGOS:
 CONCLUSIONES:
 1. Cumplimiento del Framework Solicitado: El proyecto cumple al 100% con los lineamientos, combinando Cucumber para legibilidad del negocio y Serenity/Screenplay para robustez de automatización.
 2. Escalabilidad: Iniciar un proyecto modular como el que está armado aquí permite que a futuro, si se agregan más validaciones sobre el carrito, filtrado de productos y revisión antes de compras, solo bastará con crear un Task nuevo o reutilizar los existentes.
-3. Prácticas CI/CD Ready: Al contar con un comando agnóstico de terminal (./gradlew test), este proyecto está totalmente listo para ser integrado en herramientas como Jenkins, GitHub Actions o GitLab CI, e incluso exponer el reporte de la carpeta target como artefacto de salida del pipeline.
+3. Prácticas CI/CD Ready: Al contar con un comando agnóstico de terminal (./gradlew test), el proyecto fue integrado exitosamente en un pipeline de GitHub Actions. Como valor agregado a la prueba, el proyecto exporta su "Living Documentation" generada por Serenity de forma automatizada hacia GitHub Pages. El evaluador no necesita compilar localmente para verificar el impacto y las capturas de ejecución visual. Está todo centralizado y alojado para revisión inmediata y pública en este enlace:
+👉 https://christopherpalloarias.github.io/SERENITY_CHALLENGE/
 4. Independencia del entorno: Disponer de serenity.conf como principal orquestador del WebDriver quita la dependencia a System.setProperties que comúnmente enreda las implementaciones clásicas de Selenium.
